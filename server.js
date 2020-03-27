@@ -39,6 +39,12 @@ app.prepare().then( () => {
       //observar las cookis para que el fron pueda ver las cookis y lea los tokens
       afterAuth(ctx){
         const { shop, accessToken } = ctx.session;
+        ctx.cookies.set('shopOrigin', shop,{
+          httpOnly:false,
+          secure:true,
+          sameSite:'none'
+        })
+        
         //ctx.cookies.set('shopOrigin', shop, {httpOnly: false });
         //ctx.cookies.set('accessToken', accessToken, {httpOnly: false });
 
