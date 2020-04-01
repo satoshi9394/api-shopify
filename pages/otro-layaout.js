@@ -16,11 +16,11 @@ import { useState } from 'react'
 const OtroLayout = () =>{
 
   const [descuento, setDescuento ] = useState('10%')
-  const [precio, setPrecio] = useState(20)
+  const [precio, setPrecio] = useState('20')
 
   const handleSumit = ()=>{
     const valor1 = Number(descuento.slice(0,2))/100
-    const valor2 = precio
+    const valor2 = Number(precio)
     const total = valor2 * valor1
     console.log(`El precio final es:$${total}`)
   }
