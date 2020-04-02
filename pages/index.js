@@ -1,16 +1,16 @@
 import { 
-  TextStyle,
   Page,
   Layout,
-  EmptyState,
   Card,
   Button,
-  Stack
+  Stack,
+  FooterHelp,
+  Link
 } from '@shopify/polaris'
 
 import {TitleBar, ResourcePicker } from '@shopify/app-bridge-react'
 
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg'
 
@@ -65,7 +65,7 @@ const Index = () => {
           <Card title="Por favor registrate en la pagina">
             <Card.Section>
               <Button fullWidth primary
-                onClick={()=> console.log('Registro')}
+                url='/registro'
               >
                 Registro
               </Button>
@@ -84,6 +84,12 @@ const Index = () => {
           </Card>
       </Layout.Section>
     </Layout>
+    <FooterHelp>
+      Soy Angel{' '}
+      <Link url="https://help.shopify.com/manual/orders/fulfill-orders">
+        fulfilling orders
+      </Link>
+    </FooterHelp>
   </Page>
   )
 }
