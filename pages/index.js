@@ -3,7 +3,9 @@ import {
   Page,
   Layout,
   EmptyState,
-  Card
+  Card,
+  Button,
+  Stack
 } from '@shopify/polaris'
 
 import {TitleBar, ResourcePicker } from '@shopify/app-bridge-react'
@@ -22,7 +24,7 @@ const Index = () => {
   }
   
   return(
-  <Page>
+  <Page fullWidth>
     <TitleBar
       primaryAction={{
         content: 'Hola cambie'
@@ -39,34 +41,46 @@ const Index = () => {
     <Layout>
       <Layout.Section>
         <Card title="Bienvenido al Home" sectioned>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-           nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+          <Stack>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
             qui officia deserunt mollit anim id est laborum.
-        </p>
+            </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+            qui officia deserunt mollit anim id est laborum.
+            </p>
+          </Stack>
         </Card>
       </Layout.Section>
       <Layout.Section secondary>
-          <EmptyState
-            action={{
-            content: 'Registratre',
-            onAction: ()=> console.log('entre a registro')
-            }}
-          >
-          </EmptyState>
-          <EmptyState
-            action={{
-            content: 'Enviar productos a revision',
-            onAction: ()=> setOpen(true)
-            }}
-          >
-          </EmptyState>
-          <Card sectioned>
-            <p>La revision de los productos<br></br>
-            puede tomar de 24 a 48 horas</p>
+          <Card title="Por favor registrate en la pagina">
+            <Card.Section>
+              <Button fullWidth primary
+                onClick={()=> console.log('Registro')}
+              >
+                Registro
+              </Button>
+            </Card.Section>
+            <Card.Section>
+              <Button fullWidth primary
+                onClick={()=> setOpen(true) }
+              >
+                Enviar productos a revision
+              </Button>
+            </Card.Section>
+            <Card.Section>
+              <p>La revision de los productos<br></br>
+              puede tomar de 24 a 48 horas</p>
+            </Card.Section>
           </Card>
       </Layout.Section>
     </Layout>
