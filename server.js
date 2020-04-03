@@ -47,6 +47,11 @@ app.prepare().then( () => {
         
         //ctx.cookies.set('shopOrigin', shop, {httpOnly: false });
         //ctx.cookies.set('accessToken', accessToken, {httpOnly: false });
+        ctx.cookies.set('accessToken',accessToken, {
+          httpOnly: false,
+          secure: true,
+          sameSite: 'none'
+        })
 
         ctx.redirect('/');
       }

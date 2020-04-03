@@ -12,16 +12,27 @@ import {TitleBar, ResourcePicker } from '@shopify/app-bridge-react'
 
 import {useState, useEffect} from 'react'
 
+import axios from 'axios'
+
 const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg'
 
 const Index = () => {
 
   const [ open, setOpen ] = useState(false)
 
+  const [ input, setInput ] = useState([])
+
   const handleSelection = (resourse) => {
     setOpen(false)
     console.log(resourse)
   }
+
+  useEffect(() => {
+    axios.get('/api/shopify')
+      .then((resp)=>console.log(resp)
+      )
+      .catch((err)=> alert(`${err} recurso no encontrado`))
+  },)
   
   return(
   <Page fullWidth>

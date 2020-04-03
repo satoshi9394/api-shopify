@@ -41,16 +41,16 @@ const Registro = () =>{
   const setSave = () => {
     console.log(`se guardo el estado 
     nommbre de la tienda: ${nombreTienda} 
-    email ${email}
-    nombre del representante ${nombreRepresentante}
-    tarjeta ${tarjeta}
-    telefono ${telefono}
+    email: ${email}
+    nombre del representante: ${nombreRepresentante}
+    # tarjeta: ${tarjeta}
+    telefono: ${telefono}
     `)
   }  
 
 
   return(
-    <Page fullWidth>
+    <Page fullWidth title={'Registro de Tienda'}>
       <Form onSubmit={setSave}>
         <FormLayout.Group condensed >
           <TextField 
