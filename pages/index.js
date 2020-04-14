@@ -17,6 +17,32 @@ import axios from 'axios'
 const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg'
 
 const Index = () => {
+  //llamada a api interna para encontrar id
+  useEffect(() => {
+    //http://localhost:3001/api/v1
+    const axiosMongo = axios.create({
+      baseURL: 'http://localhost:3001/api/v1',
+      timeout: 2000
+    })
+
+
+    axios.get('/api/shopify')
+      .then((resp)=>{
+        console.log('exitoso',resp)
+        axiosMongo.get(`/store/${resp.data.shop.id}`)
+          .then(resp2 => {
+            console.log('tienda existente', resp2)
+          }, 
+          error2 => {
+            if(error2.response.status === 400){
+              console.log('tienda no encontrada',error2)
+            }else{
+              console.log('error mongo', error2)
+            }
+          })
+      })
+      .catch((err)=> alert(`${err} recurso no encontrado`))
+  },)
 
   const [ open, setOpen ] = useState(false)
 
@@ -27,18 +53,14 @@ const Index = () => {
     console.log(resourse)
   }
 
-  useEffect(() => {
-    axios.get('/api/shopify')
-      .then((resp)=>console.log(resp)
-      )
-      .catch((err)=> alert(`${err} recurso no encontrado`))
-  },)
+
+
   
   return(
   <Page fullWidth>
     <TitleBar
       primaryAction={{
-        content: 'Hola cambie'
+        content: 'Hola cambie * 2'
       }}
     />
 
