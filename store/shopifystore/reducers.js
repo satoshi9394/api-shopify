@@ -3,7 +3,7 @@ import types from './types'
 const INITAL_STATE = {
   shop: null,
   shop_exists: false,
-  shop_loading: true,
+  shop_is_loading: true,
   shop_error: null,
   shop_status: null 
 }
@@ -16,23 +16,56 @@ const shopifystoreReducer = (state = INITAL_STATE, action) => {
       
       return {
         ...state,
-        shop
+        shop,
       }
     }
-    case types.REGISTRO_BTN_ACTIVE: {
-      const { type, shop_exists} = action
+    case types.SHOP_EXIST: {
 
+      //data_store
+      const {status} = action.data_store
       return {
         ...state,
-        shop_exists
+        shop_exists: true,
+        shop_is_loading:false,
+        shop_error: null,
+        shop_status: status
       }
     }
-    case types.ACTIVE_LOADING: {
-      const { type, shop_loading} = action
-
+    case types.SHOP_NOT_EXIST: {
       return {
         ...state,
-        shop_loading
+        shop_exists: false,
+        shop_is_loading: false,
+
+      }
+    }
+
+    case types.SHOP_IS_LOADING: {
+      return {
+        ...state,
+        shop_is_loading: true
+      }
+    }
+
+    case types.SHOP_IS_NOT_LOADING: {
+      return {
+        ...state,
+        shop_is_loading: false
+      }
+    }
+
+    case types.SET_ERROR: {
+      const { error } = action
+      return {
+        ...state,
+        shop_error: error
+      }
+    }
+
+    case types.CLEAR_ERROR: {
+      return {
+        ...state,
+        shop_error: null
       }
     }
 

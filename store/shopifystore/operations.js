@@ -7,8 +7,14 @@ import { createStore } from 'redux'
 //funciones que uso internamente en este archivo
 //pero que el componente no necesite ejecutar
 const _saveShopifyData = Creators.saveShopifyData
-const _registroBtn = Creators.registroBtn
-const _loading = Creators.loading
+const _shopExists= Creators.shopExists
+const _shopNotExists = Creators.shopNotExist
+
+
+const _isLoading = Creators.isLoading
+const _isNotLoading = Creators.isNotLoading
+const _setError = Creators.setError
+const clearError = Creators.clearError
 
 
 
@@ -28,15 +34,13 @@ const getShopifyData = () => {
         console.log('entre')
         const {shop} = response.data
         dispatch(_saveShopifyData(shop))
-
+        //id de la tienda
         const { id } = shop
         axios.get(`/store/${id}`)
           .then(response => {
-            dispatch(_loading(false))
-            dispatch(_registroBtn(true))
+            dispatch(_shopExists(response.data))
           },error => {
-            dispatch(_loading(false))
-            dispatch(_registroBtn(false))
+            dispatch(_shopNotExists())
           })
       }, error => {
         console.log('falle', error)
@@ -48,6 +52,24 @@ const getShopifyData = () => {
   }
 }
 
+const createShop = (payload) => {
+
+  return(dispatch) => {
+    dispatch(_isLoading())
+    axios.post('/store', payload)
+      .then(response => {
+        dispatch(_shopExists(response.data))
+      },err => {
+        dispatch(_shopNotExists())
+        switch(err.response.status){
+          case 400:
+            dispatch(_setError('Error de validacion, verifique sus datos'))
+          default:
+            dispatch(_setError('Error de servidor'))  
+        }
+      })
+  }
+}
 
 
 
@@ -56,5 +78,7 @@ const getShopifyData = () => {
 //con los componentes reales
 //con el exterior
 export default {
-  getShopifyData
+  getShopifyData,
+  createShop,
+  clearError
 }

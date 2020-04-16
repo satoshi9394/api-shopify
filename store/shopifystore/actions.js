@@ -8,23 +8,53 @@ const saveShopifyData = (shop) => {
   }
 }
 
-const registroBtn = (shop_exists) => {
+const shopExists = (data_store) => {
   return{
-    type: types.REGISTRO_BTN_ACTIVE,
-    shop_exists
+    type: types.SHOP_EXIST,
+    data_store
   }
 }
 
-const loading = (shop_loading) => {
+const shopNotExist = () => {
   return{
-    type: types.ACTIVE_LOADING,
-    shop_loading
+    type: types.SHOP_NOT_EXIST,
   }
 }
+
+const isLoading = () => {
+  return{
+    type: types.SHOP_IS_LOADING,
+  }
+}
+
+const isNotLoading = () => {
+  return{
+    type: types.SHOP_IS_NOT_LOADING,
+  }
+}
+
+const setError = (error) => {
+  return{
+    type: types.SET_ERROR,
+    error
+  }
+}
+
+const clearError = () => {
+  return{
+    type: types.CLEAR_ERROR,
+  }
+}
+
+
 
 export default {
   saveShopifyData,
-  registroBtn,
-  loading
+  shopExists,
+  shopNotExist,
+  isLoading,
+  isNotLoading,
+  setError,
+  clearError
 }
 

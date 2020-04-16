@@ -5,14 +5,17 @@ import {
   Button,
   Stack,
   FooterHelp,
-  Link
+  Link,
+  Spinner
 } from '@shopify/polaris'
 
 import {TitleBar, ResourcePicker } from '@shopify/app-bridge-react'
 
 import {useState, useEffect} from 'react'
 
-import axios from 'axios'
+import { useRouter} from 'next/router'
+
+//import axios from 'axios'
 
 const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg'
 
@@ -27,20 +30,54 @@ const Index = ({
 
   //llamada a api interna para encontrar id
   useEffect(() => {
+
     getShopifyData()
-  },[])//se ejecuta cuando se monta el virtual dom
+
+  },[])
 
   const [ open, setOpen ] = useState(false)
 
-  const [ input, setInput ] = useState([])
+  const router = useRouter()
 
   const handleSelection = (resourse) => {
     setOpen(false)
     console.log(resourse)
   }
+  let msg = "Por favor registrate en la pagina"
+  if(shop_exists){
+    msg="Por favor seleciona tus productos para revision"
+  }
 
+  let accionBotones = <Spinner accessibilityLabel="Spinner example" size="large" color="teal" />
 
-
+  if(shop_is_loading===false){
+    accionBotones = (
+      <Card title={msg}>
+        <Card.Section>
+          <Button fullWidth primary
+          disabled={shop_exists}
+            onClick={()=> router.push('/registro')}
+          >
+            Registro
+          </Button>
+        </Card.Section>
+        <Card.Section>
+          <Button fullWidth primary
+            disabled={!shop_exists}
+            onClick={()=> setOpen(true) }
+          >
+            Enviar productos a revision
+          </Button>
+        </Card.Section>
+        <Card.Section>
+          <p>La revision de los productos<br></br>
+          puede tomar de 24 a 48 horas</p>
+        </Card.Section>
+      </Card>
+    )
+  }
+  console.log('hola',shop_is_loading)
+  
   
   return(
   <Page fullWidth>
@@ -81,26 +118,7 @@ const Index = ({
         </Card>
       </Layout.Section>
       <Layout.Section secondary>
-          <Card title="Por favor registrate en la pagina">
-            <Card.Section>
-              <Button fullWidth primary
-                url='/registro'
-              >
-                Registro
-              </Button>
-            </Card.Section>
-            <Card.Section>
-              <Button fullWidth primary
-                onClick={()=> setOpen(true) }
-              >
-                Enviar productos a revision
-              </Button>
-            </Card.Section>
-            <Card.Section>
-              <p>La revision de los productos<br></br>
-              puede tomar de 24 a 48 horas</p>
-            </Card.Section>
-          </Card>
+          {accionBotones}
       </Layout.Section>
     </Layout>
     <FooterHelp>
