@@ -23,7 +23,8 @@ const Index = ({
     shop_is_loading,
     shop_exists,
     shop_status,
-    getShopifyData
+    getShopifyData,
+    reviewVariants
   }) => {
 +
   
@@ -39,9 +40,51 @@ const Index = ({
 
   const router = useRouter()
 
-  const handleSelection = (resourse) => {
+  const handleSelection = (resource) => {
     setOpen(false)
-    console.log(resourse)
+
+    let payload=[]
+    resource.selection.forEach( product => {
+      const {
+
+        id: product_id,
+        title: product_title,
+        images,
+        vendor
+
+      } = product
+
+      const variants = product.variants.map( variant => {
+        const {
+          id: variant_id,
+          title: variant_title,
+          weight: variant_weight,
+          weightUnit: variant_unit,
+          price: variant_price
+        } = variant
+
+        return{
+          product_id,
+          product_title,
+          product_image: images.length > 0 ? images[0].originalSrc: undefined,
+          vendor,
+
+          variant_id,
+          variant_title,
+          variant_weight,
+          variant_unit,
+          variant_price,
+          variant_recommended_price: 0,
+          tax:0,
+          status: 'Calculando'
+        }
+      })
+
+      payload=[...payload, ...variants]
+    })
+    console.log('payload', payload)
+    reviewVariants({variants: payload})
+    console.log(resource)
   }
   let msg = "Por favor registrate en la pagina"
   if(shop_exists){
@@ -63,7 +106,7 @@ const Index = ({
         </Card.Section>
         <Card.Section>
           <Button fullWidth primary
-            disabled={!shop_exists}
+            disabled={shop_exists===false  || shop_status==='en_revision'}
             onClick={()=> setOpen(true) }
           >
             Enviar productos a revision
