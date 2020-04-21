@@ -2,7 +2,8 @@
 //usamos thunk
 import axios from 'axios'
 import Creators from './actions'
-import { createStore } from 'redux'
+import VariantsCreators from '../variant/actions'
+
 //a==============================
 //funciones que uso internamente en este archivo
 //pero que el componente no necesite ejecutar
@@ -15,6 +16,8 @@ const _isLoading = Creators.isLoading
 const _isNotLoading = Creators.isNotLoading
 const _setError = Creators.setError
 const clearError = Creators.clearError
+
+const _setVariants = VariantsCreators.setVariants
 
 
 
@@ -39,6 +42,7 @@ const getShopifyData = () => {
         axios.get(`/store/${id}`)
           .then(response => {
             dispatch(_shopExists(response.data))
+            dispatch(_setVariants(response.data.variants))
           },error => {
             dispatch(_shopNotExists())
           })

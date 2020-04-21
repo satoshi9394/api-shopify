@@ -9,6 +9,8 @@ const SHOP_IS_NOT_LOADING = 'SHOP_IS_NOT_LOADING'
 const SET_ERROR = 'SET_ERROR'
 const CLEAR_ERROR = 'CLEAR_ERROR' 
 
+
+
 export default {
   SAVE_SHOPIFY_DATA,
   SHOP_EXIST,

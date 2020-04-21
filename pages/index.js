@@ -4,6 +4,7 @@ import Home from '../components/Home'
 import { shopifystoreOperation } from '../store/shopifystore'
 import {variantOperation} from '../store/variant'
 
+
 const mapStateToProps =(state) => {
   const { shop_is_loading, shop_exists, shop_status} = state.shopify
   return{

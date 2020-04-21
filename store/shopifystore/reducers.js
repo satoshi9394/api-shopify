@@ -5,7 +5,9 @@ const INITAL_STATE = {
   shop_exists: false,
   shop_is_loading: true,
   shop_error: null,
-  shop_status: null 
+  shop_status: null,
+  
+
 }
 
 const shopifystoreReducer = (state = INITAL_STATE, action) => {
