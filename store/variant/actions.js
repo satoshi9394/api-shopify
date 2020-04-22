@@ -7,8 +7,15 @@ const setVariants = (variants) => {
     variants, //shop: shop
   }
 }
+const solveVariant = (id) => {
+  return{
+    type: types.SOLVE_VARIANT,
+    id, //shop: shop
+  }
+}
 
 export default {
   setVariants,
+  solveVariant
 }
 

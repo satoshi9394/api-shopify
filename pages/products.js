@@ -13,7 +13,7 @@ const mapStateToProps =(state) => {
 }
 const mapDispatchToProps = dispatch => ({
   getShopifyData: () => dispatch(shopifystoreOperation.getShopifyData()),
-  reviewVariants: (payload) => dispatch(variantOperation.reviewVariants(payload))
+  solveVariant: (id) => dispatch(variantOperation.solveVariant(id))
 })
 
 export default connect(

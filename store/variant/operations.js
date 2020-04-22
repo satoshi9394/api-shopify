@@ -9,6 +9,9 @@ import shopifyCreators from '../shopifystore/actions'
 const setVariants = Creators.setVariants
 const _shopExists = shopifyCreators.shopExists
 
+//acciones del modal
+const solveVariant = Creators.solveVariant
+
 
 // A ===================
 //funciones que uso internamente en este archivo
@@ -50,5 +53,6 @@ const reviewVariants = (payload) => {
 //con los componentes reales es decir tienen comunicacion
 //con el exterior
 export default {
-    reviewVariants
+    reviewVariants,
+    solveVariant
 }
