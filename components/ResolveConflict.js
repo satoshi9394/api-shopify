@@ -9,6 +9,8 @@ import {
 
 } from '@shopify/polaris'
 
+import { MobileAcceptMajorMonotone } from '@shopify/polaris-icons'
+
 import { useState, useEffect} from 'react'
 
 const ResolveConflict = ({
@@ -17,7 +19,7 @@ const ResolveConflict = ({
   variant_in_modal,
   variants_with_conflict,
 
-  //aciones que viene de redux
+  //aciones que vienen de redux
   closeModal,
   stepVariant
 }) => {
@@ -48,7 +50,8 @@ const ResolveConflict = ({
       price_selected
     }
     if(v.length<=1) return setHasPaginator(p)
-    const i = v.findIndex( element => element.id === id)
+    //const i = v.findIndex( element => element.id === id)
+    const i = v.findIndex(element=> element.id ===id)
     if(i>0) p.hasPrevious = true;
     if(i<v.length-1) p.hasNext = true;
     setHasPaginator(p)
@@ -65,10 +68,12 @@ const ResolveConflict = ({
         hasPrevious={hasPaginator.hasPrevious}
         onPrevious={()=>{
           console.log('Previos')
+          move(-1)
         }}
         hasNext={hasPaginator.hasNext}
         onNext={()=>{
           console.log('Next')
+          move(1)
         }}
       />
     )
@@ -84,8 +89,21 @@ const ResolveConflict = ({
     closeModal()
   }
 
-  const handleSelectPrice=()=>{
+  const handleSelectPrice=(price_selected)=>{
+    setHasPaginator({...hasPaginator, price_selected})
+    move(0, price_selected)
+  }
 
+  const move = (step, price_selected) => {
+
+    if(price_selected===undefined) price_selected = hasPaginator.price_selected
+    const v = variants_with_conflict
+    let i = v.findIndex( e => e.id === id) + step
+    if(i>0 && i<v.length){
+      //paso valido
+      console.log('entre a mover')
+      stepVariant(price_selected, i)
+    }
   }
 
   const footer = (
@@ -101,12 +119,14 @@ const ResolveConflict = ({
     </Stack>
   )
 
+  const currentVariant = variants_with_conflict.findIndex(e=>e.id===id) + 1
+
   return(
     <Modal
       large
       open={modal_open}
       onClose={handleClose}
-      title={'Resolver conflicto'}
+      title={`Resolver conflicto ${currentVariant} de ${variants_with_conflict.length}`}
       footer={footer}
     >
     <Modal.Section>
@@ -149,8 +169,9 @@ const ResolveConflict = ({
             <p className='text-center'>Impuestos ${calculated_duty_original}</p>
             <div className='text-center mt-10'>
               <Button
-                onClick={()=> handleSelectPrice()}
-                primary={false}
+                onClick={()=> handleSelectPrice('original')}
+                primary={hasPaginator.price_selected==='original'}
+                icon={hasPaginator.price_selected==='original' && MobileAcceptMajorMonotone}
               >
                 Selecionar
               </Button>
@@ -168,8 +189,9 @@ const ResolveConflict = ({
             <p className='text-center'>Impuestos ${calculated_duty}</p>
             <div className='text-center mt-10'>
               <Button
-                onClick={()=> handleSelectPrice()}
-                primary={false}
+                onClick={()=> handleSelectPrice('recommended')}
+                primary={hasPaginator.price_selected==='recommended'}
+                icon={hasPaginator.price_selected==='recommended' && MobileAcceptMajorMonotone}
               >
                 Selecionar
               </Button>
