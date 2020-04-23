@@ -14,8 +14,24 @@ const solveVariant = (id) => {
   }
 }
 
+const closeModal = () => {
+  return{
+    type: types.CLOSE_MODEL
+  }
+}
+
+const stepVariant = (selected, next_index) => {
+  return{
+    type: types.STEP_VARIANT,
+    selected,
+    next_index
+  }
+}
+
 export default {
   setVariants,
-  solveVariant
+  solveVariant,
+  closeModal,
+  stepVariant
 }
 

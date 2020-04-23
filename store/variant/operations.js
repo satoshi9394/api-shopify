@@ -11,6 +11,8 @@ const _shopExists = shopifyCreators.shopExists
 
 //acciones del modal
 const solveVariant = Creators.solveVariant
+const closeModal = Creators.closeModal
+const stepVariant = Creators.stepVariant
 
 
 // A ===================
@@ -54,5 +56,7 @@ const reviewVariants = (payload) => {
 //con el exterior
 export default {
     reviewVariants,
-    solveVariant
+    solveVariant,
+    closeModal,
+    stepVariant
 }

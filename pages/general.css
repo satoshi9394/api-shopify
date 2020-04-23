@@ -1,0 +1,30 @@
+/* Fix error not showing image with paginator and ResourceList */
+.Polaris-Avatar--hidden {
+  visibility: inherit !important;
+}
+.text-center{
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+.title-price{
+  font-size: 32px;
+  text-align: center;
+  font-weight: 400;
+  margin: 8px;
+}
+.mt-10{
+  margin-top: 10px;
+}
+.title-wrapper{
+  text-align: center;
+  min-height: 50px;
+}
+.title-wrapper .Polaris-Badge__Content{
+  font-size: 16px;
+}
+.subtitle{
+  font-size: 16px;
+  font-weight: bold;
+}

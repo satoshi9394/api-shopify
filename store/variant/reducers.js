@@ -41,6 +41,37 @@ const variantReducer = (state = INITAL_STATE, action) => {
       }
     }
 
+    case types.CLOSE_MODEL: {
+      return{
+        ...state,
+        variant_in_modal: {},
+        modal_open: false
+      }
+    }
+
+    case types.STEP_VARIANT: {
+      const { selected, next_index } = action
+      const currentIndex = state.variants_with_conflict
+        .findIndex( element => element.id === state.variant_in_modal.id)
+      const variant = {...state.variant_in_modal, price_selected: selected }  
+
+      let newVariants = JSON.parse(JSON.stringify(state.variants_with_conflict))
+      newVariants[currentIndex]= variant
+
+      const nextVariant = {...newVariants[next_index]}
+
+      const remaining = newVariants.filter( element => 
+        element.price_selected===undefined || 
+        element.price_selected=== null
+      )
+      return{
+        ...state,
+        variant_in_modal: variant,
+        variants_with_conflict: nextVariant,
+        can_solve: remaining.length > 0 ? false : true
+      }
+    }
+
 
     default: return state;
   }

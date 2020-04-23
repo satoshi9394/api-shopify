@@ -1,11 +1,11 @@
 import { Page, 
-    FooterHelp, 
-    Link, 
-    ResourceList, 
-    ResourceItem, 
-    Avatar, 
-    Card,
-    Stack,
+  FooterHelp, 
+  Link, 
+  ResourceList, 
+  ResourceItem, 
+  Avatar, 
+  Card,
+  Stack,
   Badge,
   TextStyle,
   Button,
@@ -101,29 +101,29 @@ const Products = ({
 
 
     return (
-        <Page fullWidth>
+      <Page fullWidth>
 
 
-            <Card>
-                <ResourceList
-                    resourceName={resourceName}
-                    items={variants}
-                    showHeader={false}
-                    loading={variant_is_loading}
-                    renderItem={renderItem}
-                />
-            </Card>
+        <Card>
+          <ResourceList
+            resourceName={resourceName}
+            items={variants}
+            showHeader={false}
+            loading={variant_is_loading}
+            renderItem={renderItem}
+          />
+        </Card>
             
+        <ResolveConflict/>
 
+        <FooterHelp>
+          Soy Angel{' '}
+          <Link url="https://help.shopify.com/manual/orders/fulfill-orders">
+            Santillan
+          </Link>
+        </FooterHelp>
 
-            <FooterHelp>
-                Soy Fernando{' '}
-                <Link url="https://help.shopify.com/manual/orders/fulfill-orders">
-                    Castillo
-                </Link>
-            </FooterHelp>
-
-        </Page>
+      </Page>
     )
 
 }

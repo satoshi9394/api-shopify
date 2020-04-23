@@ -19,6 +19,8 @@ import withRedux from 'next-redux-wrapper'
 import reducer from '../store'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
+import './general.css'
+
 //construye el store
 const middleware = [thunk]
 const makeStore = (initialState, option) => {
