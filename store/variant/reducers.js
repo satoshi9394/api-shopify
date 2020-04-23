@@ -51,6 +51,7 @@ const variantReducer = (state = INITAL_STATE, action) => {
 
     case types.STEP_VARIANT: {
       const { selected, next_index } = action
+
       const currentIndex = state.variants_with_conflict
         .findIndex( element => element.id === state.variant_in_modal.id)
       const variant = {...state.variant_in_modal, price_selected: selected }  
@@ -64,10 +65,11 @@ const variantReducer = (state = INITAL_STATE, action) => {
         element.price_selected===undefined || 
         element.price_selected=== null
       )
+      console.log('finalice cambios')
       return{
         ...state,
-        variant_in_modal: variant,
-        variants_with_conflict: nextVariant,
+        variant_in_modal: nextVariant,
+        variants_with_conflict: newVariants,
         can_solve: remaining.length > 0 ? false : true
       }
     }

@@ -99,9 +99,9 @@ const ResolveConflict = ({
     if(price_selected===undefined) price_selected = hasPaginator.price_selected
     const v = variants_with_conflict
     let i = v.findIndex( e => e.id === id) + step
-    if(i>0 && i<v.length){
+    if(i>=0 && i<v.length){
       //paso valido
-      console.log('entre a mover')
+      console.log('entre a mover' , price_selected, i)
       stepVariant(price_selected, i)
     }
   }
