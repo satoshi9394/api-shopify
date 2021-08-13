@@ -24,7 +24,7 @@
     "js-cookie": "^2.2.1",
     "koa": "^2.11.0",
     "koa-session": "^5.13.1",
-    "next": "^9.1.5",
+    "next": "^11.1.0",
     "next-redux-wrapper": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
